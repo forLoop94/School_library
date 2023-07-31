@@ -105,7 +105,7 @@ To run tests, run the following command:
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 **Prosper Kessie**
+👤 **Charles Andrews**
 
 - GitHub: [forLoop94](https://github.com/forLoop94)
 - LinkedIn: [Charles Andrews](https://www.linkedin.com/in/andrewsCharlesUwem/)
