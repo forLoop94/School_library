@@ -1,5 +1,5 @@
 class Person
-  def initialize(name = "Unknown", age, parent_permission: true)
+  def initialize(name = 'Unknown', age = nil, parent_permission: true)
     @id = Time.new.to_i
     @name = name
     @age = age
@@ -20,6 +20,5 @@ class Person
   end
 end
 
-person_1 = Person.new("alice", 24)
-puts person_1.can_use_services?
-
+person1 = Person.new('alice', 24)
+puts person1.can_use_services?
