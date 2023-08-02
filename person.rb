@@ -26,5 +26,4 @@ class Person < Nameable
   end
 end
 
-person1 = Person.new('alice', 24)
-puts person1.can_use_services?
+

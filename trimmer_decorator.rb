@@ -1,7 +1,8 @@
 require_relative 'base_decorator'
+require_relative 'person'
 
-class TrimmerDecorator
-  def correct_name
+class TrimmerDecorator < Decorator
+  def correct_name()
     if super.length <= 10
       super
     else
@@ -9,3 +10,9 @@ class TrimmerDecorator
     end
   end
 end
+
+person2 = Person.new('maximilianusperulus', 24)
+puts person2.correct_name
+
+trimmed_person = TrimmerDecorator.new(person2)
+puts trimmed_person.correct_name
