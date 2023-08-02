@@ -2,6 +2,7 @@ require_relative 'nameable'
 
 class Person < Nameable
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
+    super()
     @id = Time.new.to_i
     @name = name
     @age = age
@@ -25,5 +26,3 @@ class Person < Nameable
     @age >= 18
   end
 end
-
-
