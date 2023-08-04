@@ -4,7 +4,7 @@ class Student < Person
   attr_reader :classroom
 
   def initialize(age, classroom, name = 'Unknown', parent_permission: true)
-    super(age, name, parent_permission: parent_permission)
+    super(name, age, parent_permission: parent_permission)
     @classroom = classroom
   end
 
@@ -18,5 +18,6 @@ class Student < Person
   end
 end
 
-student1 = Student.new('alice', 24)
+student1 = Student.new(28, "class_5", "Emem")
+p student1
 p student1.play_hooky
