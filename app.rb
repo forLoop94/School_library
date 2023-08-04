@@ -90,6 +90,23 @@ class App
     puts "Book created successfully"
     @books << Book.new(title, author)
   end
+
+  def create_rental
+   if @books.empty?
+    puts "No books to rent"
+   elsif @people.empty?
+    puts "No person to rent book to"
+   else
+    print "Select book of your choice by number"
+    @books.each_with_index { |book, index| puts "#{index}) #{book.title} by #{book.author}"}
+    print "Book number: "
+    book_number = gets.chomp.to_i
+    print "Select person of your choice by number"
+    @people.each_with_index { |person, index| puts "#{index}) #{person.name}"}
+    print "Person number"
+    person_number = gets.chomp.to_i
+   end
+  end
 end
 
 app = App.new()
