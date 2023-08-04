@@ -18,6 +18,6 @@ class Student < Person
   end
 end
 
-student1 = Student.new(28, "class_5", "Emem")
-p student1
-p student1.play_hooky
+# student1 = Student.new(28, "class_5", "Emem")
+# p student1
+# p student1.play_hooky

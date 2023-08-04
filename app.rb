@@ -1,41 +1,39 @@
 require_relative 'book'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'rental'
 
 class App
-  attr_reader :people
-
   def initialize
     @books = []
     @people = []
   end
 
   def list_books
-    if @books.empty?
-      puts "No books available"
-    else
-      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-    end
+    puts "No books available" if @books.empty?
+
+    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    puts
   end
 
   def list_people
-    if @people.empty?
-      "No persons available"
-    else
-      @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-    end
+    puts "No persons available" if @people.empty?
+
+    @people.each { |person| puts "[#{person.class}] Name:
+    #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    puts
   end
 
   def list_rentals_by_person_id
     puts "ID of person: "
     id = gets.chomp.to_i
     target_person = @people.find { |person| person.id == id }
-    if target_person.nil
+    if target_person == nil
       puts "No person available"
     else
       puts "Rentals"
-      puts "The given person doesn't rent any book" if person.rentals.empty?
-      person.rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" }
+      puts "The given person did not rent any book" if target_person.rentals.empty?
+      target_person.rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" }
     end
   end
 
@@ -53,8 +51,6 @@ class App
   def student_creator
     print "Name: "
     name = gets.chomp.to_s
-    # print "Enter class: "
-    # classname = gets.chomp.to_s
     print "Age: "
     age = gets.chomp.to_i
     print "Has parent permission? [Y/N]: "
@@ -74,18 +70,18 @@ class App
   def teacher_creator
     print "Name: "
     name = gets.chomp
-    print "Age"
+    print "Age: "
     age = gets.chomp.to_i
-    print "specialization"
+    print "specialization: "
     specialization = gets.chomp
     parent_permission = true
     @people << Teacher.new(age, specialization, name, parent_permission: parent_permission)
   end
 
   def create_book
-    print "Title"
+    print "Title: "
     title = gets.chomp
-    print "Author"
+    print "Author: "
     author = gets.chomp
     puts "Book created successfully"
     @books << Book.new(title, author)
@@ -97,18 +93,45 @@ class App
    elsif @people.empty?
     puts "No person to rent book to"
    else
-    print "Select book of your choice by number"
-    @books.each_with_index { |book, index| puts "#{index}) #{book.title} by #{book.author}"}
-    print "Book number: "
+    print "Select book of your choice by number: "
+    @books.each_with_index do |book, index|
+      puts "#{index}) Title: #{book.title}, Author: #{book.author}"
+    end
+
     book_number = gets.chomp.to_i
-    print "Select person of your choice by number"
-    @people.each_with_index { |person, index| puts "#{index}) #{person.name}"}
-    print "Person number"
-    person_number = gets.chomp.to_i
+
+    if book_number >= @books.length
+      puts "Out of range"
+    else
+      print "Select person of your choice by number: "
+      @people.each_with_index do |person, index|
+        puts "#{index}) [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+      end
+
+      person_number = gets.chomp.to_i
+
+      if person_number >= @people.length
+        puts "Out of range"
+      else
+        date = get_user_date('Enter date [YYYY-MM-DD]: ').to_s
+        Rental.new(date, @books[book_number], @people[person_number])
+        puts "Rental created successfully"
+      end
+    end
    end
+  end
+
+  def get_user_date(request)
+    puts request
+    gets.chomp
   end
 end
 
 app = App.new()
-# app.create_person
-puts app.list_people
+app.create_book
+app.list_books
+app.create_person
+app.list_people
+app.create_rental
+app.list_rentals_by_person_id
+
