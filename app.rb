@@ -70,9 +70,19 @@ class App
     @people << Student.new(age, nil, name, parent_permission: parent_permission)
     puts "You have successfully registered a student"
   end
+
+  def teacher_creator
+    print "Name: "
+    name = gets.chomp
+    print "Age"
+    age = gets.chomp.to_i
+    print "specialization"
+    specialization = gets.chomp
+    parent_permission = true
+    @people << Teacher.new(age, specialization, name, parent_permission: parent_permission)
+  end
 end
 
 app = App.new()
 # app.create_person
 puts app.list_people
-puts app.people.each { |person| puts person }
