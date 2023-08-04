@@ -40,24 +40,35 @@ class App
   end
 
   def create_person
-    print "To create a student, press 1: "
+    print "D you want to create a student (1) or a teacher (2)? [input the number]: "
     chosen_num = gets.chomp.to_i
-    if chosen_num == 1
+    case chosen_num
+    when 1
       student_creator
-    else
-      puts "All you can create now is a student"
+    when 2
+      teacher_creator
     end
   end
 
   def student_creator
-    print "Enter student name: "
+    print "Name: "
     name = gets.chomp.to_s
-    print "Enter class: "
-    classname = gets.chomp.to_s
-    print "Enter student age: "
+    # print "Enter class: "
+    # classname = gets.chomp.to_s
+    print "Age: "
     age = gets.chomp.to_i
-    @people << Student.new(age, classname, name)
-    puts "Student registered succesfully"
+    print "Has parent permission? [Y/N]: "
+    permission = gets.chomp.downcase
+    parent_permission = true
+    case permission
+    when 'n'
+      parent_permission = false
+    when 'y'
+      parent_permission = true
+    end
+
+    @people << Student.new(age, nil, name, parent_permission: parent_permission)
+    puts "You have successfully registered a student"
   end
 end
 
