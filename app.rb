@@ -81,6 +81,15 @@ class App
     parent_permission = true
     @people << Teacher.new(age, specialization, name, parent_permission: parent_permission)
   end
+
+  def create_book
+    print "Title"
+    title = gets.chomp
+    print "Author"
+    author = gets.chomp
+    puts "Book created successfully"
+    @books << Book.new(title, author)
+  end
 end
 
 app = App.new()
